@@ -4,4 +4,6 @@ export type {
   ITaskContext,
   ITasks,
   TToggleTaskStatus,
+  TCompleted,
+  TValidationTask,
 } from './taskContext';

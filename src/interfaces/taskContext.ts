@@ -1,9 +1,17 @@
 import { ReactNode } from 'react';
 
+export type TCompleted = 'done' | 'ready' | 'progress';
+
+export interface TValidationTask {
+  done: 'ready';
+  progress: 'done';
+  ready: 'progress';
+}
+
 export interface ITasks {
   id: number;
   text: string;
-  completed: boolean;
+  completed: TCompleted;
 }
 
 export interface ITaskContext {
@@ -18,4 +26,5 @@ export interface IContext {
   toggleTaskStatus: TToggleTaskStatus;
   clearCompletedTasks: () => Promise<void>;
   loadTasks: () => Promise<void>;
+  deleteTask: TToggleTaskStatus;
 }

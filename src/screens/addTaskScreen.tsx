@@ -17,7 +17,7 @@ export const AddTaskScreen = ({ navigation }: AddTaskScreenProps) => {
     const newTask: ITasks = {
       id: Date.now(),
       text: text,
-      completed: false,
+      completed: 'ready',
     };
     console.log(text);
     addTask(newTask);

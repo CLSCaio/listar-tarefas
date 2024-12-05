@@ -13,8 +13,13 @@ interface ListTaskScreenProps {
 export const ListTaskScreen = ({
   navigation,
 }: ListTaskScreenProps): JSX.Element => {
-  const { tasks, toggleTaskStatus, clearCompletedTasks, loadTasks } =
-    useTaskContext();
+  const {
+    tasks,
+    toggleTaskStatus,
+    clearCompletedTasks,
+    loadTasks,
+    deleteTask,
+  } = useTaskContext();
 
   useEffect(() => {
     loadTasks();
@@ -27,7 +32,11 @@ export const ListTaskScreen = ({
         keyExtractor={(task: ITasks) => task.id.toString()}
         renderItem={({ item, index }: { item: ITasks; index: number }) => (
           <>
-            <TaskCard task={item} toggleTaskStatus={toggleTaskStatus} />
+            <TaskCard
+              task={item}
+              toggleTaskStatus={toggleTaskStatus}
+              deleteTask={deleteTask}
+            />
             {index + 1 < tasks.length && (
               <View style={styles.separator}> </View>
             )}

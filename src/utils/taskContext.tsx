@@ -1,10 +1,16 @@
 import React, { createContext, useState, useContext } from 'react';
 
-import { IContext, ITaskContext, ITasks } from 'interfaces';
+import { IContext, ITaskContext, ITasks, TValidationTask } from 'interfaces';
 
 import { getTaskData, setTaskData } from './taskStorage';
 
 const TaskContext = createContext<IContext | undefined>(undefined);
+
+export const validationCompletedTask: TValidationTask = {
+  done: 'ready',
+  progress: 'done',
+  ready: 'progress',
+};
 
 export const TaskProvider = ({ children }: ITaskContext): any => {
   const [tasks, setTasks] = useState<ITasks[]>([]);
@@ -25,15 +31,24 @@ export const TaskProvider = ({ children }: ITaskContext): any => {
 
   const toggleTaskStatus = async (taskId: number) => {
     const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, completed: !task.completed } : task
+      task.id === taskId
+        ? { ...task, completed: validationCompletedTask[task.completed] }
+        : task
     );
     setTasks(updatedTasks);
     await setTaskData('tasks', updatedTasks);
   };
 
+  const deleteTask = async (taskId: number) => {
+    const updatedTasks = tasks.filter(({ id }) => id !== taskId);
+    setTasks(updatedTasks);
+    await setTaskData('tasks', updatedTasks);
+  };
+
   const clearCompletedTasks = async () => {
-    setTasks([]);
-    await setTaskData('tasks', []);
+    const updatedTasks = tasks.filter(({ completed }) => completed !== 'done');
+    setTasks(updatedTasks);
+    await setTaskData('tasks', updatedTasks);
   };
 
   return (
@@ -44,6 +59,7 @@ export const TaskProvider = ({ children }: ITaskContext): any => {
         toggleTaskStatus,
         clearCompletedTasks,
         loadTasks,
+        deleteTask,
       }}
     >
       {children}
