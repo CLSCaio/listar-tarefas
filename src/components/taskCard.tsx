@@ -16,15 +16,15 @@ export const TaskCard = ({
   deleteTask,
 }: TaskCardProps) => {
   const validationFinishTask = {
-    done: 'Tarefa concluida',
-    progress: 'Tarefa em andamento',
-    ready: 'Tarefa aguardando ser iniciada',
+    done: 'Concluida',
+    progress: 'Em andamento',
+    ready: 'Aguardando',
   };
 
   const validationProgressTask = {
-    done: 'Colocar tarefa para aguardar',
-    progress: 'Concluir Tarefa',
-    ready: 'Começar tarefa',
+    done: 'Aguardar',
+    progress: 'Concluir',
+    ready: 'Começar',
   };
 
   const validationColorTask = {
