@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { ITasks, TToggleTaskStatus } from 'interfaces';
