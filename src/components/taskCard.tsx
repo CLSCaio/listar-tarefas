@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { ITasks, TToggleTaskStatus } from 'interfaces';
@@ -40,16 +46,28 @@ export const TaskCard = ({
       alignItems: 'center',
       padding: 10,
       gap: 10,
+      height: '100%',
     },
     textAlert: {
       color: validationColorTask[task.completed],
+    },
+    textTask: {
+      width: 120,
     },
   });
 
   return (
     <View style={styles.view}>
-      <View style={styles.view}>
-        <Text>{task.text}</Text>
+      <View
+        style={{
+          ...styles.view,
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        }}
+      >
+        <Text numberOfLines={5} style={styles.textTask}>
+          {task.text}
+        </Text>
         <Text style={styles.textAlert}>
           {validationFinishTask[task.completed]}
         </Text>
